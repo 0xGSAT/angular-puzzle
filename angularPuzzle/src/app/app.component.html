@@ -1,7 +1,13 @@
 <h1>{{title}}</h1>
 <nav>
     <a [routerLink]='["/home"]' routerLinkActive="active">Home</a><br>
-    <a [routerLink]='["/login"]' routerLinkActive="active">Login</a><br>
-    <a [routerLink]='["/admin"]' routerLinkActive="active">Admin</a>
+    <a *ngIf="!(this.currentUser.user.role ==='admin') && !(this.currentUser.user.role ==='user')" [routerLink]='["/login"]' routerLinkActive="active">Login</a><br>
+    
+    <a *ngIf="this.currentUser.user.role ==='admin'" [routerLink]='["/admin"]' routerLinkActive="active">Admin</a><br>
+    <a *ngIf="this.currentUser.user.role ==='user'" [routerLink]='["/user"]' routerLinkActive="active">User</a><br>
+    <a *ngIf="(this.currentUser.user.role ==='admin') || (this.currentUser.user.role ==='user')" [routerLink]='["/login"]' routerLinkActive="active" (click)="signOut()">Sign out</a><br>
+    
 </nav>
+UserId: {{this.currentUser.user.userId}}
+
 <router-outlet></router-outlet>

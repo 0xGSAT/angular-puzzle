@@ -9,6 +9,8 @@ import { AdminComponent } from './admin/admin.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { FormsModule } from '@angular/forms';
 import { UserComponent } from './user/user.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CurrentUserService } from 'src/services/current-user.service';
 
 @NgModule({
   declarations: [
@@ -22,9 +24,10 @@ import { UserComponent } from './user/user.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [CurrentUserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

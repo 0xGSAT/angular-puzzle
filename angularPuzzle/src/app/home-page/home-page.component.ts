@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { CurrentUserService } from 'src/services/current-user.service';
+import { GetStudentInfoService } from 'src/services/get-student-info.service';
 
 @Component({
   selector: 'app-home-page',
@@ -8,9 +11,26 @@ import { Component, OnInit } from '@angular/core';
 export class HomePageComponent implements OnInit {
 
   homePageMessage:string = "This page hould be visible to everyone"; 
-  constructor() { }
+  infoString: string = "";
+  isDisabled!:boolean;
+  constructor(private getStudentInfo: GetStudentInfoService, private currentUser: CurrentUserService) { }
 
   ngOnInit(): void {
   }
+  
+  isInfoDisabled(): boolean {
+    return !(this.currentUser.user.role==='user');
+  }
 
+
+  getUserData(){
+    this.getStudentInfo.getGeneralInfo().subscribe(
+      (response) => {
+        this.infoString = JSON.stringify(response);
+      },
+      (error) => {
+        console.error('Login failed:', error);
+      }
+    );
+  }
 }

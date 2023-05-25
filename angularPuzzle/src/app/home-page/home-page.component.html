@@ -1,1 +1,8 @@
 <h1>{{homePageMessage}}</h1>
+<div>
+    <button type="button" (click)="getUserData()" [disabled]="isInfoDisabled()">
+        Get Info
+    </button>
+</div>
+<div>{{infoString}}</div>
+<div>----</div>

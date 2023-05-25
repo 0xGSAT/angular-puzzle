@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GetStudentInfoService } from 'src/services/get-student-info.service';
 
 @Component({
   selector: 'app-user',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  constructor() { }
+  addressString!: String;
+  constructor(private getStudentInfo: GetStudentInfoService) { }
 
   ngOnInit(): void {
+  }
+
+  getStudentAddress(){
+    this.getStudentInfo.getStudentAddress().subscribe(
+      (response) => {
+        this.addressString = JSON.stringify(response);
+      },
+      (error) => {
+        console.error('Login failed:', error);
+      }
+    );
   }
 
 }
