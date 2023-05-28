@@ -1,8 +1,24 @@
-<p>user works!</p>
-<div>
-    <button type="button" (click)="getStudentAddress()" >
-        Get Info
+<h1 class="text-primary my-2 text-center">Welcome Back User {{this.currentUser.user.userId}}!</h1>
+<div class="btn-container text-center my-5">
+    <button type="button" class="btn btn-primary" (click)="getStudentAddress()" >
+        See your information in our database
     </button>
 </div>
-<div>{{addressString}}</div>
-<div>----</div>
+<table *ngIf="studentInfo" class="table table-striped my-15">  
+    <thead>  
+        <tr>
+          <th>Student Id</th>
+          <th>Street Number</th>
+          <th>Street Name</th> 
+          <th>City, Province</th>  
+        </tr>  
+    </thead>  
+    <tbody>  
+      <tr>  
+        <td>{{ studentInfo.studentNumber }}</td>  
+        <td>{{ studentInfo.address.streetNumber }}</td>  
+        <td>{{ studentInfo.address.streetName}}</td>  
+        <td>{{ studentInfo.address.city }}, {{ studentInfo.address.province }}</td>  
+      </tr>  
+    </tbody>  
+  </table>  

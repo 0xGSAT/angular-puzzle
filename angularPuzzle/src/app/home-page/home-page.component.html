@@ -1,8 +1,37 @@
-<h1>{{homePageMessage}}</h1>
-<div>
-    <button type="button" (click)="getUserData()" [disabled]="isInfoDisabled()">
-        Get Info
+<h1 class="text-primary my-2 text-center">{{homePageMessage}}</h1>
+<div class="btn-container text-center my-5">
+    <button class="btn btn-primary" type="button" (click)="getUserData()" *ngIf="!isInfoDisabled(); else disabledBtn">
+      Get Student Info
     </button>
+    <div>
+    <ng-template #disabledBtn>
+      <button  class="btn btn-primary" type="button"  (click)="getErrorMessage()" >
+        Get Student Info
+      </button>
+    </ng-template>
+  </div>
+  <div  *ngIf="isErrorDisplayed" class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+    <div class="alert alert-danger text-center" style="max-width: 400px;">
+      Error message: {{errorString}}
+    </div>
+  </div>
 </div>
-<div>{{infoString}}</div>
-<div>----</div>
+
+<table *ngIf="studentInfo" class="table table-striped my-10" style="margin-top: 5%;" >  
+  <thead>  
+      <tr>
+        <th scope="col">Student Id</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th> 
+        <th scope="col">Phone</th>  
+      </tr>  
+  </thead>  
+  <tbody>  
+    <tr>  
+      <td class="table-cell">{{ studentInfo.studentNumber }}</td>  
+      <td class="table-cell">{{ studentInfo.firstName }}</td>  
+      <td class="table-cell">{{ studentInfo.lastName }}</td>  
+      <td class="table-cell">{{ studentInfo.phoneNumber }}</td>  
+    </tr>  
+  </tbody>  
+</table>  

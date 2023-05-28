@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/models/user.model';
 import { CurrentUserService } from 'src/services/current-user.service';
 import { GetStudentInfoService } from 'src/services/get-student-info.service';
 
@@ -10,9 +10,13 @@ import { GetStudentInfoService } from 'src/services/get-student-info.service';
 })
 export class HomePageComponent implements OnInit {
 
-  homePageMessage:string = "This page hould be visible to everyone"; 
+  homePageMessage:string = "Welcome to Home Page :)"; 
   infoString: string = "";
   isDisabled!:boolean;
+  studentInfo!: User;
+  errorString = "Please Login as User!";
+  isErrorDisplayed = false;
+
   constructor(private getStudentInfo: GetStudentInfoService, private currentUser: CurrentUserService) { }
 
   ngOnInit(): void {
@@ -27,10 +31,18 @@ export class HomePageComponent implements OnInit {
     this.getStudentInfo.getGeneralInfo().subscribe(
       (response) => {
         this.infoString = JSON.stringify(response);
+        console.log(this.infoString);
+        this.studentInfo = response;
+        console.log(this.studentInfo);
       },
       (error) => {
         console.error('Login failed:', error);
       }
     );
+  }
+
+  getErrorMessage(){
+    this.isErrorDisplayed = true;
+    return this.isErrorDisplayed;
   }
 }

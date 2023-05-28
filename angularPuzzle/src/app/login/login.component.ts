@@ -11,8 +11,9 @@ import { CurrentUserService } from 'src/services/current-user.service';
 })
 export class LoginComponent implements OnInit {
 
-  userId!:number;
-  password!:string;
+  userId!: number;
+  password!: string;
+  errorString!: string;
 
   constructor(private router: Router, private authService: AuthenticationService, public currentUser: CurrentUserService) { }
 
@@ -20,42 +21,40 @@ export class LoginComponent implements OnInit {
   }
 
   loginAsUser(){
-    this.currentUser.user.userId = this.userId;
-    this.currentUser.user.password = this.password;
-    this.authService.loginAsUser().subscribe(
-      (response) => {
-        this.currentUser.user.role = response.role;
-        this.router.navigate(['/user']); 
-      },
-      (error) => {
-        console.error('Login failed:', error);
-      }
-    );
+    console.log(this.userId + "==" + this.password);
+    if(this.password === undefined || this.userId === undefined){
+      this.errorString = "Error!!! Please fill in the info.";
+    } else {
+      this.currentUser.user.userId = this.userId;
+      this.currentUser.user.password = this.password;
+      this.authService.loginAsUser().subscribe(
+        (response) => {
+          this.currentUser.user.role = response.role;
+          this.router.navigate(['/user']); 
+        },
+        (error) => {
+          console.error('Login failed:', error);
+        }
+      );
+    }
   }
 
   loginAsAdmin(){
-    this.currentUser.user.userId = this.userId;
-    this.currentUser.user.password = this.password;
-    this.authService.loginAsAdmin().subscribe(
-      (response) => {
-        this.currentUser.user.role = response.role;
-        this.router.navigate(['/admin']); 
-      },
-      (error) => {
-        console.error('Login failed:', error);
-      }
-    );
+    if(this.password === undefined || this.userId === undefined){
+      this.errorString = "Error!!! Please fill in the info.";
+    } else {
+      this.currentUser.user.userId = this.userId;
+      this.currentUser.user.password = this.password;
+      this.authService.loginAsAdmin().subscribe(
+        (response) => {
+          this.currentUser.user.role = response.role;
+          this.router.navigate(['/admin']); 
+        },
+        (error) => {
+          console.error('Login failed:', error);
+        }
+      );
+    }
   }
-
-  // isUser(): boolean{
-  //   if (this.getCurrentUser() !== undefined && this.getCurrentUser() !== null && this.getCurrentUser().role === 'user') {
-  //     // User object is returned
-  //     console.log('User object:', this.getCurrentUser());
-  //     return true;
-  //   } 
-  //   console.log('User object not found');
-  //   return false;
-  // }
-
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Grades } from 'src/models/grades.model';
 import { GetStudentInfoService } from 'src/services/get-student-info.service';
 
 @Component({
@@ -7,7 +8,8 @@ import { GetStudentInfoService } from 'src/services/get-student-info.service';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-  gradesString!:string;
+  studentInfo!:Grades;
+  adminMessage = "Admin Portal"
   constructor(private getStudentInfo: GetStudentInfoService) { }
 
   ngOnInit(): void {
@@ -15,7 +17,7 @@ export class AdminComponent implements OnInit {
   getGrades(){
     this.getStudentInfo.getStudentGrades().subscribe(
       (response) => {
-        this.gradesString = JSON.stringify(response);
+        this.studentInfo = response;
       },
       (error) => {
         console.error('Login failed:', error);

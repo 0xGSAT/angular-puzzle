@@ -1,13 +1,33 @@
-<h1>{{title}}</h1>
-<nav>
-    <a [routerLink]='["/home"]' routerLinkActive="active">Home</a><br>
-    <a *ngIf="!(this.currentUser.user.role ==='admin') && !(this.currentUser.user.role ==='user')" [routerLink]='["/login"]' routerLinkActive="active">Login</a><br>
-    
-    <a *ngIf="this.currentUser.user.role ==='admin'" [routerLink]='["/admin"]' routerLinkActive="active">Admin</a><br>
-    <a *ngIf="this.currentUser.user.role ==='user'" [routerLink]='["/user"]' routerLinkActive="active">User</a><br>
-    <a *ngIf="(this.currentUser.user.role ==='admin') || (this.currentUser.user.role ==='user')" [routerLink]='["/login"]' routerLinkActive="active" (click)="signOut()">Sign out</a><br>
-    
+<nav class="navbar navbar-expand-lg navbar-light bg-light ">
+  <a class="navbar-brand" [routerLink]='["/home"]' routerLinkActive="active">My App</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="container text-center">
+    <span *ngIf="this.currentUser?.user?.userId" >User Id: {{this.currentUser.user.userId}}</span>
+  </div>
+  <div class="container">
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]='["/home"]' routerLinkActive="active">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" *ngIf="!(this.currentUser.user.role ==='admin') && !(this.currentUser.user.role ==='user');" [routerLink]='["/login"]' routerLinkActive="active">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" *ngIf="this.currentUser.user.role ==='admin'" [routerLink]='["/admin"]' routerLinkActive="active">Admin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" *ngIf="this.currentUser.user.role ==='user'" [routerLink]='["/user"]' routerLinkActive="active">User</a>
+          </li>
+          <li class="nav-item">
+      <a class="nav-link" *ngIf="(this.currentUser.user.role ==='admin') || (this.currentUser.user.role ==='user')" [routerLink]='["/login"]' routerLinkActive="active" (click)="signOut()">Sign out</a>
+          </li>
+        </ul>
+      </div>
+    </div>
 </nav>
-UserId: {{this.currentUser.user.userId}}
 
 <router-outlet></router-outlet>

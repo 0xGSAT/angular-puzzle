@@ -1,8 +1,25 @@
-<p>admin works!</p>
-<div>
-    <button type="button" (click)="getGrades()" >
+<h1 class="text-primary my-2 text-center">{{adminMessage}}</h1>
+<div class="btn-container text-center my-5">
+    <button class="btn btn-primary"  type="button" (click)="getGrades()" >
         Get Grades
     </button>
 </div>
-<div>{{gradesString}}</div>
-<div>----</div>
+
+<table *ngIf="studentInfo" class="table table-striped my-10" style="margin-top: 5%;" >  
+  <thead>  
+      <tr>
+        <th scope="col">Student Id</th>
+        <th *ngFor="let course of studentInfo.grades">
+          {{course.subject}}
+        </th>
+      </tr>  
+  </thead>  
+  <tbody>  
+    <tr>  
+      <td>{{ studentInfo.studentNumber }}</td>  
+      <td *ngFor="let course of studentInfo.grades">
+          {{course.grade}}
+      </td>
+    </tr>  
+  </tbody>  
+</table>  

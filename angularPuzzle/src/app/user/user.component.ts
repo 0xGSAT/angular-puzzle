@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/models/user.model';
+import { CurrentUserService } from 'src/services/current-user.service';
 import { GetStudentInfoService } from 'src/services/get-student-info.service';
 
 @Component({
@@ -9,7 +11,8 @@ import { GetStudentInfoService } from 'src/services/get-student-info.service';
 export class UserComponent implements OnInit {
 
   addressString!: String;
-  constructor(private getStudentInfo: GetStudentInfoService) { }
+  studentInfo!: User;
+  constructor(private getStudentInfo: GetStudentInfoService, public currentUser: CurrentUserService) { }
 
   ngOnInit(): void {
   }
@@ -18,6 +21,8 @@ export class UserComponent implements OnInit {
     this.getStudentInfo.getStudentAddress().subscribe(
       (response) => {
         this.addressString = JSON.stringify(response);
+        this.studentInfo = response;
+        console.log(this.studentInfo);
       },
       (error) => {
         console.error('Login failed:', error);
