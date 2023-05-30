@@ -5,16 +5,16 @@
     </button>
     <div>
     <ng-template #disabledBtn>
-      <button  class="btn btn-primary" type="button"  (click)="getErrorMessage()" >
+      <button  class="btn btn-primary" type="button"  (click)="getErrorMessage()" disabled >
         Get Student Info
       </button>
     </ng-template>
   </div>
-  <div  *ngIf="isErrorDisplayed" class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+  <!-- <div  *ngIf="isErrorDisplayed" class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
     <div class="alert alert-danger text-center" style="max-width: 400px;">
       Error message: {{errorString}}
     </div>
-  </div>
+  </div> -->
 </div>
 
 <table *ngIf="studentInfo" class="table table-striped my-10" style="margin-top: 5%;" >  
