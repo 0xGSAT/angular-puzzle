@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent, canActivate: [AdminGuard]  },
   { path: 'login', component: LoginComponent },
   { path: 'user', component: UserComponent, canActivate: [UserGuard]  },
-  { path: '**', component: PageNotFoundComponent },
+  { path: '**', redirectTo: '/home' },
 ];
 
 @NgModule({
