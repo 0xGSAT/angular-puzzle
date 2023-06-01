@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class GetStudentInfoService {
 
-  constructor(private http: HttpClient) { }
+  constructor(public http: HttpClient) { }
   infoURL:string = "http://demo6308572.mockable.io/student/account";
   addressURL: string = "http://demo6308572.mockable.io/student/address";
   gradesURL: string = "http://demo6308572.mockable.io/student/grades";
@@ -18,6 +18,15 @@ export class GetStudentInfoService {
 
   getStudentAddress():Observable<any>{
     return this.http.get(this.addressURL);
+    // .subscribe(
+    //   (response) => {
+    //     this.addressString = JSON.stringify(response);
+    //     this.studentInfo = response;
+    //   },
+    //   (error) => {
+    //     console.error('Login failed:', error);
+    //   }
+    // );
   }
   getStudentGrades():Observable<any>{
     return this.http.get(this.gradesURL);

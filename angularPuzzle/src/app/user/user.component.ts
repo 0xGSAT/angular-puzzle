@@ -22,7 +22,6 @@ export class UserComponent implements OnInit {
       (response) => {
         this.addressString = JSON.stringify(response);
         this.studentInfo = response;
-        console.log(this.studentInfo);
       },
       (error) => {
         console.error('Login failed:', error);

@@ -10,7 +10,7 @@
       ],
       "parserOptions": {
         "project": [
-          "tsconfig.json"
+          "./angularPuzzle/tsconfig.json"
         ],
         "createDefaultProgram": true
       },

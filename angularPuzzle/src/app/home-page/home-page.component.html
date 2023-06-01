@@ -1,14 +1,14 @@
 <h1 class="text-primary my-2 text-center">{{homePageMessage}}</h1>
 <div class="btn-container text-center my-5">
-    <button class="btn btn-primary" type="button" (click)="getUserData()" *ngIf="!isInfoDisabled(); else disabledBtn">
+    <button class="btn btn-primary" type="button" (click)="getUserData()" *ngIf="!isInfoDisabled()">
       Get Student Info
     </button>
     <div>
-    <ng-template #disabledBtn>
+    <!-- <ng-template #disabledBtn>
       <button  class="btn btn-primary" type="button"  (click)="getErrorMessage()" disabled >
         Get Student Info
       </button>
-    </ng-template>
+    </ng-template> -->
   </div>
   <!-- <div  *ngIf="isErrorDisplayed" class="d-flex align-items-center justify-content-center" style="min-height: 100vh;">
     <div class="alert alert-danger text-center" style="max-width: 400px;">

@@ -16,5 +16,7 @@ export class AppComponent {
 
   signOut(){
     this.currentUser.user = new User;
+    localStorage.clear();
+    
   }
 }

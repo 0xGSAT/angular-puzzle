@@ -9,8 +9,9 @@ import { AdminComponent } from './admin/admin.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { FormsModule } from '@angular/forms';
 import { UserComponent } from './user/user.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CurrentUserService } from 'src/services/current-user.service';
+import { AuthInterceptor } from 'src/interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import { CurrentUserService } from 'src/services/current-user.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [CurrentUserService],
+  providers: [CurrentUserService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

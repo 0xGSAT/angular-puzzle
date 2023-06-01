@@ -23,7 +23,7 @@ export class HomePageComponent implements OnInit {
   }
   
   isInfoDisabled(): boolean {
-    return !(this.currentUser.user.role==='user');
+    return !(this.currentUser.user.role==='user' || this.currentUser.user.role==='admin');
   }
 
 
@@ -31,9 +31,7 @@ export class HomePageComponent implements OnInit {
     this.getStudentInfo.getGeneralInfo().subscribe(
       (response) => {
         this.infoString = JSON.stringify(response);
-        console.log(this.infoString);
         this.studentInfo = response;
-        console.log(this.studentInfo);
       },
       (error) => {
         console.error('Login failed:', error);

@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
   }
 
   loginAsUser(){
-    console.log(this.userId + "==" + this.password);
     if(this.password === undefined || this.userId === undefined){
       this.errorString = "Error!!! Please fill in the info.";
     } else {
@@ -30,7 +29,9 @@ export class LoginComponent implements OnInit {
       this.authService.loginAsUser().subscribe(
         (response) => {
           this.currentUser.user.role = response.role;
-          this.router.navigate(['/user']); 
+          this.router.navigate(['/user']);
+          let {password, ...storeUser }: User = this.currentUser.user;
+          localStorage.setItem('user', JSON.stringify(storeUser));
         },
         (error) => {
           console.error('Login failed:', error);
@@ -48,7 +49,9 @@ export class LoginComponent implements OnInit {
       this.authService.loginAsAdmin().subscribe(
         (response) => {
           this.currentUser.user.role = response.role;
-          this.router.navigate(['/admin']); 
+          this.router.navigate(['/admin']);
+          let {password, ...storeUser }: User = this.currentUser.user;
+          localStorage.setItem('user', JSON.stringify(storeUser));
         },
         (error) => {
           console.error('Login failed:', error);
